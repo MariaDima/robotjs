@@ -1,7 +1,8 @@
 var robot = require('..');
 var os = require('os');
 
-// TODO: Need tests for keyToggle, typeString, typeStringDelayed, and setKeyboardDelay.
+
+// TODO: Need tests for setKeyboardDelay.
 
 describe('Keyboard', () => {
   it('Tap a key.', function() {
@@ -42,13 +43,13 @@ describe('Keyboard', () => {
 
 	it('Tap a UTF32 character.', function()
   {
-		expect(() => robot.utf32Tap('r'.charCodeAt(0))).not.toThrow();
-		expect(() => robot.utf32Tap('ά'.charCodeAt(0))).not.toThrow();
-		expect(() => robot.utf32Tap('ö'.charCodeAt(0))).not.toThrow();
-		expect(() => robot.utf32Tap('ち'.charCodeAt(0))).not.toThrow();
-		expect(() => robot.utf32Tap('嗨'.charCodeAt(0))).not.toThrow();
-		expect(() => robot.utf32Tap('ఝ'.charCodeAt(0))).not.toThrow();
-		expect(() => robot.utf32Tap()).toThrowError(/Invalid character typed./);
+		expect(() => robot.unicodeTap('r'.charCodeAt(0))).not.toThrow();
+		expect(() => robot.unicodeTap('ά'.charCodeAt(0))).not.toThrow();
+		expect(() => robot.unicodeTap('ö'.charCodeAt(0))).not.toThrow();
+		expect(() => robot.unicodeTap('ち'.charCodeAt(0))).not.toThrow();
+		expect(() => robot.unicodeTap('嗨'.charCodeAt(0))).not.toThrow();
+		expect(() => robot.unicodeTap('ఝ'.charCodeAt(0))).not.toThrow();
+		expect(() => robot.unicodeTap()).toThrowError(/Invalid character typed./);
 	});
 
 	it('Test Key Toggle.', function()
@@ -67,19 +68,19 @@ describe('Keyboard', () => {
   	modifiers.push('shift');
 		modifiers.push('control');
 
-		expect(() => robot.keyToggle("right", "down", modifiers)).not.toThrow();
-		expect(() => robot.keyToggle("right", "up", modifiers)).not.toThrow();
+		expect(() => robot.keyToggle('right', 'down', modifiers)).not.toThrow();
+		expect(() => robot.keyToggle('right', 'up', modifiers)).not.toThrow();
 	});
 
 	it('Type a string.', function()
   {
-		expect(() => robot.typeString("Typed rάöち嗨ఝ 1")).not.toThrow();
+		expect(() => robot.typeString('Typed rάöち嗨ఝ 1')).not.toThrow();
 		expect(() => robot.typeString()).toThrowError(/Invalid number of arguments./);
 	});
 
 	it('Type a string with delay.', function()
   {
-		expect(() => robot.typeStringDelayed("Typed rάöち嗨ఝ with delay 1", 600)).not.toThrow();
+		expect(() => robot.typeStringDelayed('Typed rάöち嗨ఝ with delay 1', 600)).not.toThrow();
 		expect(() => robot.typeStringDelayed()).toThrowError(/Invalid number of arguments./);
 	});
 });
