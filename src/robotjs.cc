@@ -282,8 +282,8 @@ NAN_METHOD(dragMouse)
 		return Nan::ThrowError("Invalid number of arguments.");
 	}
 
-	const size_t x = info[0]->Int32Value();
-	const size_t y = info[1]->Int32Value();
+	const int32_t x = info[0]->Int32Value();
+	const int32_t y = info[1]->Int32Value();
 	MMMouseButton button = LEFT_BUTTON;
 
 	if (info.Length() == 3)
@@ -302,8 +302,8 @@ NAN_METHOD(dragMouse)
 		}
 	}
 
-	MMPoint point;
-	point = MMPointMake(x, y);
+	MMSignedPoint point;
+	point = MMSignedPointMake(x, y);
 	dragMouse(point, button);
 	microsleep(mouseDelay);
 
@@ -316,11 +316,11 @@ NAN_METHOD(moveMouse)
 	{
 		return Nan::ThrowError("Invalid number of arguments.");
 	}
-	size_t x = info[0]->Int32Value();
-	size_t y = info[1]->Int32Value();
+	int32_t x = info[0]->Int32Value();
+	int32_t y = info[1]->Int32Value();
 
-	MMPoint point;
-	point = MMPointMake(x, y);
+	MMSignedPoint point;
+	point = MMSignedPointMake(x, y);
 	moveMouse(point);
 	microsleep(mouseDelay);
 
@@ -333,11 +333,11 @@ NAN_METHOD(moveMouseSmooth)
 	{
 		return Nan::ThrowError("Invalid number of arguments.");
 	}
-	size_t x = info[0]->Int32Value();
-	size_t y = info[1]->Int32Value();
+	int32_t x = info[0]->Int32Value();
+	int32_t y = info[1]->Int32Value();
 
-	MMPoint point;
-	point = MMPointMake(x, y);
+	MMSignedPoint point;
+	point = MMSignedPointMake(x, y);
 	smoothlyMoveMouse(point);
 	microsleep(mouseDelay);
 

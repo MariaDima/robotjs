@@ -33,6 +33,19 @@ describe('Mouse', () => {
     expect(robot.moveMouse('0', '0') === 1).toBeTruthy();
   });
 
+  /*
+  // Execute manually for verification.
+  // Automatic run with the rest of the tests may fail if we get out of the visible limits.
+  test('Move the mouse to another screen.', function(t)
+  {
+    lastKnownPos = robot.getMousePos();
+    expect(robot.moveMouse(lastKnownPos.x - 100, lastKnownPos.y - 100) === 1).toBeTruthy();
+	  currentPos = robot.getMousePos();
+    expect(currentPos.x === lastKnownPos.x - 100).toBeTruthy();
+    expect(currentPos.y === lastKnownPos.y - 100).toBeTruthy();
+  });
+  */
+
   it('Move the mouse smoothly.', function()
   {
     lastKnownPos = robot.moveMouseSmooth(0, 0);
