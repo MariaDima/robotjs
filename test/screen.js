@@ -35,6 +35,6 @@ test('Get screen size.', function(t)
 {
 	t.plan(3);
 	t.ok(screenSize = robot.getScreenSize(), 'successfully got the screen size.');
-	t.ok(screenSize.width !== undefined, 'screenSize.width is a valid value.');
-	t.ok(screenSize.height !== undefined, 'screenSize.height is a valid value.');
+	t.ok(screenSize.width !== undefined, 'screenSize.width is a valid value (' + screenSize.width + ').');
+	t.ok(screenSize.height !== undefined, 'screenSize.height is a valid value (' + screenSize.height + ').');
 });
