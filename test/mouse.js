@@ -30,8 +30,7 @@ describe('Mouse', () => {
       robot.moveMouse(0);
     }).toThrowError(/Invalid number/);
 
-    expect(robot.moveMouse("0", "0") === 1).toBeTruthy();
-
+    expect(robot.moveMouse('0', '0') === 1).toBeTruthy();
   });
 
   it('Move the mouse smoothly.', function()
@@ -52,34 +51,30 @@ describe('Mouse', () => {
       robot.moveMouseSmooth(0);
     }).toThrowError(/Invalid number/);
 
-    expect(robot.moveMouseSmooth("0", "0") === 1).toBeTruthy();
+    expect(robot.moveMouseSmooth('0', '0') === 1).toBeTruthy();
 
   });
 
   it('Click the mouse.', function()
   {
     expect(robot.mouseClick()).toBeTruthy();
-    expect(robot.mouseClick("left") === 1).toBeTruthy();
-    expect(robot.mouseClick("middle") === 1).toBeTruthy();
-    expect(robot.mouseClick("right") === 1).toBeTruthy();
+    expect(robot.mouseClick('left') === 1).toBeTruthy();
+    expect(robot.mouseClick('middle') === 1).toBeTruthy();
+    expect(robot.mouseClick('right') === 1).toBeTruthy();
 
-    expect(robot.mouseClick("left", 1)).toBeTruthy();
+    expect(robot.mouseClick('left', 1)).toBeTruthy();
 
-    expect(function()
-    {
-      robot.mouseClick("party");
-    }).toThrowError(/Invalid mouse/);
+    expect(() => robot.mouseClick('party')).toThrowError(/Invalid mouse/);
+    expect(() => robot.mouseClick('0')).toThrowError(/Invalid mouse/);
 
-    expect(function()
-    {
-      robot.mouseClick("0");
-    }).toThrowError(/Invalid mouse/);
+    var modifiers = []
+	  modifiers.push('shift')
+    modifiers.push('control')
+    expect(robot.mouseClick('left', 0, modifiers)).toBeTruthy();
+    expect(robot.mouseClick('left', 0, modifiers)).toBeTruthy();
 
-    expect(function()
-    {
-      robot.mouseClick("left", 0, "it");
-    }).toThrowError(/Invalid number/);
-
+    expect(() => robot.mouseClick('left', 0, 'test')).toThrowError(/Invalid key flag specified./);
+    expect(() => robot.mouseClick('left', 0, modifiers, 'test')).toThrowError(/Invalid number/);
   });
 
   it('Drag the mouse.', function()
@@ -94,12 +89,12 @@ describe('Mouse', () => {
 
     expect(function()
     {
-      robot.dragMouse(1, 1, "left", 5);
+      robot.dragMouse(1, 1, 'left', 5);
     }).toThrowError(/Invalid number/);
 
     expect(function()
     {
-      robot.dragMouse(2, 2, "party");
+      robot.dragMouse(2, 2, 'party');
     }).toThrowError(/Invalid mouse/);
 
   });

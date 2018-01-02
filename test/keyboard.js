@@ -59,7 +59,7 @@ describe('Keyboard', () => {
 		expect(() => robot.keyToggle('ά', 'down')).toThrowError(/Invalid key code specified./);
 		expect(() => robot.keyToggle('ά', 'up')).toThrowError(/Invalid key code specified./);
 		expect(() => robot.keyToggle('嗨', 'down')).toThrowError(/Invalid key code specified./);
-		expect(() => robot.keyToggle("嗨", "up")).toThrowError(/Invalid key code specified./);
+		expect(() => robot.keyToggle('嗨', 'up')).toThrowError(/Invalid key code specified./);
 	});
 
 	it('Type Ctrl+Shift+RightArrow.', function()

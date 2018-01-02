@@ -8,7 +8,10 @@
     "test": "run-script-os",
     "test:darwin:linux": "jasmine 'test/**/*.js'",
     "test:win32": "jasmine test/**/*.js",
-    "test-keyboard": "jasmine  test/keyboard.js",
+    "test-mix": "jasmine test/mix.js",
+    "test-mouse": "jasmine test/mouse.js",
+    "test-screen": "jasmine test/screen.js",
+    "test-keyboard": "jasmine test/keyboard.js",
     "install": "prebuild-install || node-gyp rebuild",
     "install-debug": "prebuild-install || node-gyp rebuild --debug",
     "prebuild": "prebuild --all"
