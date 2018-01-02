@@ -6,6 +6,9 @@
   "typings": "index.d.ts",
   "scripts": {
     "test": "node test/all.js",
+    "test-mix": "node test/mix.js",
+    "test-mouse": "node test/mouse.js",
+    "test-screen": "node test/screen.js",
     "test-keyboard": "node test/keyboard.js",
     "install": "prebuild-install || node-gyp rebuild",
     "install-debug": "prebuild-install || node-gyp rebuild --debug"
