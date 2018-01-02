@@ -37,5 +37,15 @@ describe('Keyboard', () => {
         expect(() => robot.keyTap('numpad_' + nums[x])).not.toThrow();
       }
     }
-  });
+	});
+
+	it('Tap a UTF32 character.', function()
+  {
+		expect(() => robot.utf32Tap("r".charCodeAt(0))).not.toThrow();
+		expect(() => robot.utf32Tap("ά".charCodeAt(0))).not.toThrow();
+		expect(() => robot.utf32Tap("ö".charCodeAt(0))).not.toThrow();
+		expect(() => robot.utf32Tap("ち".charCodeAt(0))).not.toThrow();
+		expect(() => robot.utf32Tap("嗨".charCodeAt(0))).not.toThrow();
+		expect(() => robot.utf32Tap()).toThrowError(/Invalid character typed./);
+	});
 });
