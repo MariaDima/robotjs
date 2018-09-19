@@ -41,18 +41,11 @@
 
 #elif defined(IS_WINDOWS)
 
-#define MMMouseToMEventF(down, button) \
-	(down ? MMMouseDownToMEventF(button) : MMMouseUpToMEventF(button))
+#define MMMouseDownToSendInputFlag(button) \
+	((button) == (LEFT_BUTTON) ? MOUSEEVENTF_LEFTDOWN : MOUSEEVENTF_RIGHTDOWN)
 
-#define MMMouseUpToMEventF(button) \
-	((button) == LEFT_BUTTON ? MOUSEEVENTF_LEFTUP \
-	                         : ((button) == RIGHT_BUTTON ? MOUSEEVENTF_RIGHTUP \
-	                                                     : MOUSEEVENTF_MIDDLEUP))
-
-#define MMMouseDownToMEventF(button) \
-	((button) == LEFT_BUTTON ? MOUSEEVENTF_LEFTDOWN \
-	                         : ((button) == RIGHT_BUTTON ? MOUSEEVENTF_RIGHTDOWN \
-	                                                     : MOUSEEVENTF_MIDDLEDOWN))
+#define MMMouseUpToSendInputFlag(button) \
+	((button) == (LEFT_BUTTON) ? MOUSEEVENTF_LEFTUP : MOUSEEVENTF_RIGHTUP)
 
 #endif
 
@@ -186,7 +179,17 @@ void toggleMouse(bool down, MMMouseButton button)
 	XTestFakeButtonEvent(display, button, down ? True : False, CurrentTime);
 	XFlush(display);
 #elif defined(IS_WINDOWS)
-	mouse_event(MMMouseToMEventF(down, button), 0, 0, 0, 0);
+	INPUT mouseInput;
+
+	mouseInput.type = INPUT_MOUSE;
+	mouseInput.mi.dx = 0;
+	mouseInput.mi.dy = 0;
+	mouseInput.mi.dwFlags = down ? MMMouseDownToSendInputFlag(button) : MMMouseUpToSendInputFlag(button);
+	mouseInput.mi.time = 0;
+	mouseInput.mi.dwExtraInfo = 0;
+	mouseInput.mi.mouseData = 0;
+
+	SendInput(1, &mouseInput, sizeof(mouseInput));
 #endif
 }
 
